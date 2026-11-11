@@ -9,6 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # Když je v repozitáři DocHledac.zip, rozbalí se a nahradí ostatní soubory projektu
+      - name: Rozbalit DocHledac.zip
+        run: |
+          if [ -f DocHledac.zip ]; then
+            rm -rf app gradle docs build.gradle.kts settings.gradle.kts gradle.properties gradlew gradlew.bat
+            unzip -o -q DocHledac.zip -x '.github/*'
+            echo "Použit obsah DocHledac.zip"
+          fi
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
