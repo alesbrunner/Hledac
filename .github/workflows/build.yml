@@ -10,13 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      # Když je v repozitáři DocHledac.zip, rozbalí se a nahradí ostatní soubory projektu
-      - name: Rozbalit DocHledac.zip
+      # Když je v repozitáři "FiF - Find in Files.zip", rozbalí se a nahradí ostatní soubory projektu
+      - name: Rozbalit zip s projektem
         run: |
-          if [ -f DocHledac.zip ]; then
+          if [ -f "FiF - Find in Files.zip" ]; then
             rm -rf app gradle docs build.gradle.kts settings.gradle.kts gradle.properties gradlew gradlew.bat
-            unzip -o -q DocHledac.zip -x '.github/*'
-            echo "Použit obsah DocHledac.zip"
+            unzip -o -q "FiF - Find in Files.zip" -x '.github/*'
+            echo "Použit obsah FiF - Find in Files.zip"
           fi
 
       - uses: actions/setup-java@v5
@@ -30,5 +30,5 @@ jobs:
           ./gradlew assembleRelease --no-daemon
       - uses: actions/upload-artifact@v6
         with:
-          name: DocHledac-apk
+          name: FiF - Find in Files
           path: app/build/outputs/apk/release/*.apk
